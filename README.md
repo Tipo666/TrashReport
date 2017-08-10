@@ -35,7 +35,7 @@ un servidor en la nube. Estas imágenes se podrán cargar al instante una vez to
 El servidor estará subdividido para los diferentes Ayuntamientos que deseen tener la aplicación propuesta.
 
 Cada imagen estará acompañada de una Geolocalización para saber el punto exacto de donde se tomó ésta. Cada imagen tendrá un espacio,
-y usando Recycler View se podrán visualizar por separado.
+y usando alguna Vista se podrán visualizar por separado.
 
 Cuando un usuario cargue una imagen, el Servidor enviará una notificación hacia el Ayuntamiento pertinente.
 
