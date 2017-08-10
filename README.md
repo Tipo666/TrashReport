@@ -21,6 +21,7 @@ LÍMITES
 Este Proyecto surge por la necesidad de algunas áreas del país donde ese necesario la intervención de las autoridades, 
 el problema de la basura es una realidad y hay que combatirla. Este Proyecto busca cooperar con todos los ayuntamientos del país
 en la recogida de basura haciendo uso de la ayuda de personas dispuestas a comprometerse con el bienestar y la higiene de la sociedad.
+
 OBJETIVOS
 
 1.	Ayudar a cualquier comunidad del país a informar sobre en qué lugares o localizaciones hay basura acumulada.
