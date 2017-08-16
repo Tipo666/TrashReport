@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1009463895987",
+    "firebase_url": "https://trash-report-3f6f0.firebaseio.com",
+    "project_id": "trash-report-3f6f0",
+    "storage_bucket": "trash-report-3f6f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009463895987:android:006166a1e40ca7bc",
+        "android_client_info": {
+          "package_name": "com.example.tipo666.trashreport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009463895987-m6cfnp7qbr61bh5nf0e41455o91hk0m1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF9tLmMH7YYsxxbDBL3KGCnyxr5eOv9mg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

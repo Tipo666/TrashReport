@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.tipo666.trashreport.Registro">
+    tools:context="com.example.tipo666.trashreport.LoginActivity">
+
 
     <LinearLayout
         android:layout_centerVertical="true"
@@ -13,12 +13,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="User Registration"
+            android:text="Login"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal" />
 
@@ -39,15 +38,15 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/buttonSignup"
+            android:id="@+id/buttonSignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Signup" />
+            android:text="Sign In" />
 
         <TextView
-            android:text="Already Registered? Signin Here"
-            android:id="@+id/textViewSignin"
+            android:text="No tienes cuenta? Regístrate aquí"
+            android:id="@+id/textViewSignUp"
             android:textAlignment="center"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
