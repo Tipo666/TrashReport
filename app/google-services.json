@@ -15,6 +15,81 @@
       },
       "oauth_client": [
         {
+          "client_id": "1009463895987-nitbjf9ihtq4md3m7pr6lu7t771dc09s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tipo666.trashreport",
+            "certificate_hash": "206cedd005703fcb15e09c33653d03ae1fbbc96c"
+          }
+        },
+        {
+          "client_id": "1009463895987-m6cfnp7qbr61bh5nf0e41455o91hk0m1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF9tLmMH7YYsxxbDBL3KGCnyxr5eOv9mg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009463895987-m6cfnp7qbr61bh5nf0e41455o91hk0m1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009463895987:android:a6c1d5370e927bc6",
+        "android_client_info": {
+          "package_name": "com.vinrosa.badtransitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009463895987-m6cfnp7qbr61bh5nf0e41455o91hk0m1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF9tLmMH7YYsxxbDBL3KGCnyxr5eOv9mg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009463895987:android:05044a4c95fb495a",
+        "android_client_info": {
+          "package_name": "com.vinrosa.badtransitapi"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "1009463895987-m6cfnp7qbr61bh5nf0e41455o91hk0m1.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -22,12 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ingreso" />
-        <activity android:name=".Registro">
+        <activity android:name=".Registro" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".FIleChooser">
 
         </activity>
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

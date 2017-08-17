@@ -99,7 +99,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }else{
                             //display some message here
-                            Toast.makeText(Registro.this,"Registration Error",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Registro.this,"Error de registro",Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
