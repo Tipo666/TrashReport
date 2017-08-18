@@ -44,6 +44,12 @@
             android:text="Save Information" />
 
         <Button
+            android:id="@+id/btnIrSelectorArchivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ir a Selector de fotos"/>
+
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

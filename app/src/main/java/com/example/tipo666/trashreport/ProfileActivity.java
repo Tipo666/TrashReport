@@ -29,6 +29,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //our new views
     private EditText editTextName, editTextAddress;
     private Button buttonSave;
+    private Button btnIrSelectorFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextName = (EditText) findViewById(R.id.editTextName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
+
+        btnIrSelectorFotos = (Button) findViewById(R.id.btnIrSelectorArchivo);
+        btnIrSelectorFotos.setOnClickListener(this);
 
         buttonSave.setOnClickListener(this);
 
@@ -101,6 +105,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == buttonSave){
             saveUserInformation();
+        }
+
+        if (view == btnIrSelectorFotos) {
+            startActivity(new Intent(this, SelectorArchivos.class));
         }
 
         //if logout is pressed
