@@ -23,7 +23,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private TextView textViewUserEmail;
     private Button buttonLogout;
 
-
     //defining a database reference
     private DatabaseReference databaseReference;
 
@@ -74,6 +73,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void saveUserInformation() {
         //Getting values from database
+
         String name = editTextName.getText().toString().trim();
         String add = editTextAddress.getText().toString().trim();
 

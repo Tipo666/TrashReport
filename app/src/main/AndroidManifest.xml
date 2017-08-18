@@ -15,19 +15,22 @@
         android:roundIcon="@mipmap/logo_trashreport"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Inicio">
+        <activity android:name=".Inicio"></activity>
+        <activity android:name=".Registro" >
+
+        </activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SelectorArchivos">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Registro" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".FIleChooser">
 
         </activity>
+        <activity android:name=".ShowImagesActivity"></activity>
     </application>
 
 </manifest>

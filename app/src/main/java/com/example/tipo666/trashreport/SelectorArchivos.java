@@ -1,6 +1,7 @@
 package com.example.tipo666.trashreport;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -9,13 +10,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -23,45 +28,44 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
-public class FIleChooser extends AppCompatActivity implements View.OnClickListener{
+public class SelectorArchivos extends AppCompatActivity implements View.OnClickListener {
 
-    //defining a database reference
-    private DatabaseReference databaseReference;
-
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-
-    private StorageReference storageReference = storage.getReference();
-
-    //a constant to track the file chooser intent
+    //constant to track image chooser intent
     private static final int PICK_IMAGE_REQUEST = 234;
 
-    //Buttons
+    //view objects
     private Button buttonChoose;
     private Button buttonUpload;
-
-    //ImageView
+    private EditText editTextName;
+    private TextView textViewShow;
     private ImageView imageView;
 
-    //a Uri object to store file path
+    //uri to store file
     private Uri filePath;
+
+    //firebase objects
+    private StorageReference storageReference;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_chooser);
+        setContentView(R.layout.activity_selector_archivos);
 
-        //getting views from layout
         buttonChoose = (Button) findViewById(R.id.buttonChoose);
         buttonUpload = (Button) findViewById(R.id.buttonUpload);
-
         imageView = (ImageView) findViewById(R.id.imageView);
+        editTextName = (EditText) findViewById(R.id.editText);
+        textViewShow = (TextView) findViewById(R.id.textViewShow);
 
-        //attaching listener
+        storageReference = FirebaseStorage.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
+        textViewShow.setOnClickListener(this);
     }
 
-    //method to show file chooser
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -69,7 +73,6 @@ public class FIleChooser extends AppCompatActivity implements View.OnClickListen
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    //handling the image chooser activity result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -78,72 +81,78 @@ public class FIleChooser extends AppCompatActivity implements View.OnClickListen
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        //if the clicked button is choose
-        if (view == buttonChoose) {
-            showFileChooser();
-        }
-        //if the clicked button is upload
-        else if (view == buttonUpload) {
-            uploadFile();
-        }
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    //this method will upload the file
+    @Override
+    public void onClick(View view) {
+
+        if (view == buttonChoose) {
+            showFileChooser();
+        } else if (view == buttonUpload) {
+            uploadFile();
+        } else if (view == textViewShow) {
+            startActivity(new Intent(this, ShowImagesActivity.class));
+        }
+
+    }
+
     private void uploadFile() {
-        //if there is a file to upload
+        //checking if file is available
         if (filePath != null) {
-            //displaying a progress dialog while upload is going on
+            //displaying progress dialog while image is uploading
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            StorageReference riversRef = storageReference.child("images/pic.jpg");
-            riversRef.putFile(filePath)
+            //getting the storage reference
+            StorageReference sRef = storageReference.child(Constants.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+
+            //adding the file to reference
+            sRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
-                            //hiding the progress dialog
+                            //dismissing the progress dialog
                             progressDialog.dismiss();
 
-                            //and displaying a success toast
+                            //displaying success toast
                             Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+
+                            //creating the upload object to store uploaded image details
+                            Upload upload = new Upload(editTextName.getText().toString().trim(), taskSnapshot.getDownloadUrl().toString());
+
+                            //adding an upload to firebase database
+                            String uploadId = mDatabase.push().getKey();
+                            mDatabase.child(uploadId).setValue(upload);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
-                            //if the upload is not successfull
-                            //hiding the progress dialog
                             progressDialog.dismiss();
-
-                            //and displaying error message
                             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //calculating progress percentage
+                            //displaying the upload progress
                             double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                            //displaying percentage in progress dialog
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
                         }
                     });
-        }
-        //if there is not any file
-        else {
-            //you can display an error toast
+        } else {
+            //display an error if no file is selected
         }
     }
 }
