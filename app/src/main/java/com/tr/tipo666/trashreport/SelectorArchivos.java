@@ -36,6 +36,7 @@ public class SelectorArchivos extends AppCompatActivity implements View.OnClickL
     //view objects
     private Button buttonChoose;
     private Button buttonUpload;
+    private Button btnCamara;
     private EditText editTextName;
     private TextView textViewShow;
     private ImageView imageView;
@@ -57,9 +58,12 @@ public class SelectorArchivos extends AppCompatActivity implements View.OnClickL
         imageView = (ImageView) findViewById(R.id.imageView);
         editTextName = (EditText) findViewById(R.id.editText);
         textViewShow = (TextView) findViewById(R.id.textViewShow);
+        btnCamara = (Button) findViewById(R.id.btnCamara);
 
         storageReference = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference(Constants.DATABASE_PATH_UPLOADS);
+
+        btnCamara.setOnClickListener(this);
 
         buttonChoose.setOnClickListener(this);
         buttonUpload.setOnClickListener(this);
@@ -93,6 +97,7 @@ public class SelectorArchivos extends AppCompatActivity implements View.OnClickL
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
+
     @Override
     public void onClick(View view) {
 
@@ -102,6 +107,10 @@ public class SelectorArchivos extends AppCompatActivity implements View.OnClickL
             uploadFile();
         } else if (view == textViewShow) {
             startActivity(new Intent(this, ShowImagesActivity.class));
+        }
+        else if (view == btnCamara){
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 0);
         }
 
     }

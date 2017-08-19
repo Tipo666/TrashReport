@@ -96,6 +96,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
+                        else {
+                            progressDialog.setMessage("No existe el usuario!!!");
+                            progressDialog.show();
+                        }
                     }
                 });
     }
