@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 /**
  * Created by Tipo666 on 8/16/2017.

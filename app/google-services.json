@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1009463895987:android:006166a1e40ca7bc",
         "android_client_info": {
-          "package_name": "com.example.tipo666.trashreport"
+          "package_name": "com.tr.tipo666.trashreport"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1009463895987-nitbjf9ihtq4md3m7pr6lu7t771dc09s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.tipo666.trashreport",
+            "package_name": "com.tr.tipo666.trashreport",
             "certificate_hash": "206cedd005703fcb15e09c33653d03ae1fbbc96c"
           }
         },

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tipo666.trashreport.ProfileActivity">
+    tools:context="com.tr.tipo666.trashreport.ProfileActivity">
 
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

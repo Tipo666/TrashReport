@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import android.content.Intent;
 import android.os.Handler;

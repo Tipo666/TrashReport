@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

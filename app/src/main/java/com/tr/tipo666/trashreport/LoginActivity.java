@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,112 +17,98 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Registro extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-
-    //defining view objects
+    private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private Button buttonSignup;
+    private TextView textViewSignup;
 
-    private TextView textViewSignin;
-
-    private ProgressDialog progressDialog;
-
-
-    //defining firebaseauth object
+    //firebase auth object
     private FirebaseAuth firebaseAuth;
+
+    //progress dialog
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_login);
 
-        //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //if getCurrentUser does not returns null
+        /*
+        //if the objects getcurrentuser method is not null
+        //means user is already logged in
         if(firebaseAuth.getCurrentUser() != null){
-            //that means user is already logged in
-            //so close this activity
+            //close this activity
             finish();
-
-            //and open profile activity
+            //opening profile activity
             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
+        */
 
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textViewSignin = (TextView) findViewById(R.id.textViewSignin);
-
-        buttonSignup = (Button) findViewById(R.id.buttonSignup);
+        buttonSignIn = (Button) findViewById(R.id.buttonSignin);
+        textViewSignup  = (TextView) findViewById(R.id.textViewSignUp);
 
         progressDialog = new ProgressDialog(this);
 
-        //attaching listener to button
-        buttonSignup.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
+        //attaching click listener
+        buttonSignIn.setOnClickListener(this);
+        textViewSignup.setOnClickListener(this);
     }
 
-    private void registerUser(){
-
-        //getting email and password from edit texts
+    //method for user login
+    private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
         String password  = editTextPassword.getText().toString().trim();
 
+
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Por favor introduzca su Email", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Por favor introduzca la contraseña",Toast.LENGTH_LONG).show();
             return;
         }
 
         //if the email and password are not empty
         //displaying a progress dialog
 
-        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.setMessage("Ingresando por favor espere...");
         progressDialog.show();
 
-        //creating a new user
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        //logging in the user
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        //checking if success
+                        progressDialog.dismiss();
+                        //if the task is successfull
                         if(task.isSuccessful()){
+                            //start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        }else{
-                            //display some message here
-                            Toast.makeText(Registro.this,"Error de registro",Toast.LENGTH_LONG).show();
                         }
-                        progressDialog.dismiss();
                     }
                 });
-
     }
 
     @Override
     public void onClick(View view) {
-
-        if(view == buttonSignup){
-            registerUser();
+        if(view == buttonSignIn){
+            userLogin();
         }
 
-        if(view == textViewSignin){
-            //open login activity when user taps on the already registered textview
-            startActivity(new Intent(this, LoginActivity.class));
+        if(view == textViewSignup){
+            finish();
+            startActivity(new Intent(this, Registro.class));
         }
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }

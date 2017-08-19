@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;

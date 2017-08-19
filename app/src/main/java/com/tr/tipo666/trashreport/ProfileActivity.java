@@ -1,4 +1,4 @@
-package com.example.tipo666.trashreport;
+package com.tr.tipo666.trashreport;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,27 +76,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void saveUserInformation() {
-        //Getting values from database
+        //TOmando valores desde la base de datos
 
         String name = editTextName.getText().toString().trim();
         String add = editTextAddress.getText().toString().trim();
 
-        //creating a userinformation object
+        //Creando el objeto de UserInformation
         UserInformation userInformation = new UserInformation(name, add);
 
-        //getting the current logged in user
+        //Tomando el usuario que esta logueado
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        //saving data to firebase database
+        //Guardando datos a la base de datos de FireBase
         /*
-        * first we are creating a new child in firebase with the
-        * unique id of logged in user
-        * and then for that user under the unique id we are saving data
-        * for saving data we are using setvalue method this method takes a normal java object
+        Primero creamos un nuevo hijo en Firebase con un ID único del usuario logueado
+        * Y luego para ese usuario bajo su ID único guardamos los datos
+        * Para guardar los datos se usa el método setValues, este método toma un objeto normal de Java
         * */
         databaseReference.child(user.getUid()).setValue(userInformation);
 
-        //displaying a success toast
+        //Desplegamos el Toast con la informacin guardada
         Toast.makeText(this, "Information Saved...", Toast.LENGTH_LONG).show();
     }
 
